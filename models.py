@@ -8,8 +8,12 @@ import datetime
 
 
 # database_path = "postgres://{}/{}".format('localhost:5432', database_name)
-database_name = "todoapp"
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+
+database_path = os.environ.get('DATABASE_URL')
+if not database_path:
+	database_name = 'todoapp'
+	database_path = 'postgresql://jaimeaznar@{}/{}'.format(
+		'localhost:5432', database_name)
 
 db = SQLAlchemy()
 
