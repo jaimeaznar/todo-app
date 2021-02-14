@@ -1,0 +1,116 @@
+/* MAIN
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.page-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 100vh;
+  background:
+    url("../img/task.png") no-repeat
+    center / cover;
+  background-blend-mode: luminosity;
+}
+
+.page-main h1 {
+  margin-bottom: 20px;
+}
+
+.page-main .header-buttons {
+  margin-top: 20%;
+}
+
+.page-main .header-buttons a {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+
+.form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  height: 100vh;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .align-center {
+  text-align: center;
+}
+
+.form-signin label {
+  visibility: hidden;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+/* tasks */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #ffff;
+}
+
+.task-container{
+  margin-left: 20rem;
+  margin-right:20rem;
+}
+
+
+.task{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+}
+
+.task-description{
+  flex-grow: 2;
+}
+
+.task-description.crossed p{
+
+  text-decoration: line-through;
+}
+
+.task-button{
+  flex-grow: 1;
+  text-align: right;
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="task-container mt-5">
+    {% for task in tasks %}
+    <div class="card">
+        <div class="card-body">
+            <div class="task">
+                <div
+                    class="task-description {% if task.state %} crossed {% endif %}">
+                    <p>{{task.description}}</p>
+                </div>
+
+                <div class="task-button">
+                    <a class="btn btn-secondary disabled"
+                        href="/task_done/{{ task.id }}">
+                        Done
+                    </a>
+                    <a class="btn btn-danger" href="/delete/{{ task.id }}">
+                        Delete
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor%}
+</div>
+<div class="wrapper">
+    <a class="btn btn-outline-secondary btn-lg"
+        href="{{url_for('create_task_form')}}"> Create new Task
+    </a>
+</div>
+
+
+{% endblock content %}

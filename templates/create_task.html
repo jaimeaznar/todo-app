@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="form-wrapper">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">
+            x
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <form class="form-signin" method="POST">
+        {{ form.csrf_token }}
+        <div class="align-center">
+            <img class="mb-4 " src="/static/img/logo.png" alt="" width="72"
+                height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Create a new Task</h1>
+        </div>
+        {{ wtf.form_field(form.description, class='form-control mb-2',
+        placeholder='Groceries...') }}
+
+        <button class="btn btn-lg btn-primary btn-block"
+            type="submit">Create</button>
+    </form>
+</div>
+{% endblock content %}

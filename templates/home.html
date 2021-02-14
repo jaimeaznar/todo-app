@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="page-main">
+    <div>
+        <h1 class="text-white">ToDo:
+            <span class="txt-type text-white" data-wait="2000"
+                data-words='["Grocery","Python Assigment", "Visit Barcelona"]'>
+            </span>
+        </h1>
+    </div>
+    <div class="header-buttons">
+        <a href="{{url_for('login')}}"
+            class="btn btn-outline-warning btn-lg">Log in</a>
+        <a href="{{url_for('signup')}}"
+            class="btn btn-outline-warning btn-lg">Sign up</a>
+    </div>
+
+</main>
+
+
+{% endblock content %}
