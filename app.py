@@ -135,7 +135,8 @@ def create_app(test_config=None):
             tasks = [{
             'id': task.id,
             'description': task.description,
-            'user_id': task.user_id
+            'user_id': task.user_id,
+            'state': task.state
         } for task in Task.query.filter_by(user_id=user_id)]
 
 
@@ -198,21 +199,22 @@ def create_app(test_config=None):
     #----------------------------------------------------------------------------#
     # Taks Done.
     #----------------------------------------------------------------------------#
-    @app.route('/task-done/<int:task_id>', methods=['PATCH'])
+    @app.route('/task-done/<int:task_id>', methods=['GET','POST'])
     @login_required
     def task_done(task_id):
-        print(task_id)
-        print(type(task_id))
         # TODO: take values from the form submitted, and update existing
         # get artist from db
         try:
-            print('inside try')
             task = Task.query.filter_by(id=task_id).first_or_404()
+            print(task)
+            print(task.state)
             
             #set values. Get them from request body
             if task.state:
+                print('task is True, we change to False')
                 task.state = False
             else:
+                print('Task is False, we change to True')
                 task.state = True
             
             # commit changes
@@ -227,13 +229,13 @@ def create_app(test_config=None):
             db.session.close()
 
 
-        return redirect(url_for('tasks', tasks = Task.query.all()))
+        return redirect(url_for('tasks'))
 
     #----------------------------------------------------------------------------#
     # Taks Delete.
     #----------------------------------------------------------------------------#
 
-    @app.route('/delete/<int:task_id>', methods=['POST'])
+    @app.route('/delete/<int:task_id>', methods=['GET','POST'])
     @login_required
     def delete_product(task_id):
         error = False
