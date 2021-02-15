@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, redirect, render_template, request, url_for, abort
+from flask import Flask, flash, redirect, render_template, request, url_for, abort, Response
 from flask_login import current_user, login_user, login_required, logout_user
 from flask_login import LoginManager
 from forms import LoginForm, SignupForm, TaskForm
@@ -15,6 +15,19 @@ def create_app(test_config=None):
     Bootstrap(app)
 
     setup_db(app)
+
+    @app.after_request
+    def after_request(response):
+        response.headers.add(
+            'Access-Control-Allow-Headers',
+            'Content-Type,Authorization,true'
+        )
+        response.headers.add(
+            'Access-Control-Allow-Methods',
+            'GET,PATCH,POST,DELETE,OPTIONS'
+        )
+
+        return response
     
     login_manager.init_app(app)
     
