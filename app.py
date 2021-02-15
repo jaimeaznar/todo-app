@@ -198,7 +198,7 @@ def create_app(test_config=None):
     #----------------------------------------------------------------------------#
     # Taks Done.
     #----------------------------------------------------------------------------#
-    @app.route('/task-done/<int:task_id>', methods=['POST'])
+    @app.route('/task-done/<int:task_id>', methods=['PATCH'])
     @login_required
     def task_done(task_id):
         print(task_id)
