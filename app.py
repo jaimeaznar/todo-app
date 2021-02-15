@@ -104,6 +104,7 @@ def create_app(test_config=None):
         flash('You must be logged in to view that page.')
         return redirect(url_for('login'))
 
+    @app.route("/logout", methods=['GET'])
     @login_required
     def logout():
         """User log-out logic."""
@@ -117,12 +118,12 @@ def create_app(test_config=None):
         error = False
         # access the db
         try:
-
+            user_id=current_user.get_id()
             tasks = [{
             'id': task.id,
             'description': task.description,
             'user_id': task.user_id
-        } for task in Task.query.all()]
+        } for task in Task.query.filter_by(user_id=user_id)]
 
 
         except BaseException:
@@ -185,7 +186,7 @@ def create_app(test_config=None):
     # Taks Done.
     #----------------------------------------------------------------------------#
     @app.route('/task-done/<int:task_id>', methods=['POST'])
-    # @login_required
+    @login_required
     def task_done(task_id):
         print(task_id)
         print(type(task_id))
@@ -204,14 +205,14 @@ def create_app(test_config=None):
             # commit changes
             db.session.commit()
 
-        except:
-            # if failed rollback
-            db.session.rollback()
+        except BaseException as e:
+            print(f'<<<<{e.__str__()}')
             flash('An error occurred while editing the task. Please try again later.')
-        
+            error = True
+            db.session.rollback()
         finally:
             db.session.close()
-        # artist record with ID <artist_id> using the new attributes
+
 
         return redirect(url_for('tasks', tasks = Task.query.all()))
 
@@ -220,7 +221,7 @@ def create_app(test_config=None):
     #----------------------------------------------------------------------------#
 
     @app.route('/delete/<int:task_id>', methods=['POST'])
-    # @login_required
+    @login_required
     def delete_product(task_id):
         error = False
         task = Task.query.filter_by(id=task_id).first_or_404()
